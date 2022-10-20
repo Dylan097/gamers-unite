@@ -1,5 +1,5 @@
 body {
-    background: #001cff url('/static/images/pixel-bg.jpg') no-repeat;
+    background: #001cff url('/static/images/pixel-bg.jpg') no-repeat fixed;
     background-size: cover;
 }
 
