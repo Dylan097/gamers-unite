@@ -1,0 +1,37 @@
+body {
+    background: #001cff url('/static/images/pixel-bg.jpg') no-repeat;
+    background-size: cover;
+}
+
+.navbar {
+    font-family: 'Press Start 2P', cursive;
+}
+
+.navbar-brand {
+    font-size: 2.25rem;
+}
+
+.author {
+    font-size: 1.75rem;
+}
+
+.card {
+    background-color: #f0f8ff;
+}
+
+.card-body {
+    font-family: 'kalam', cursive;
+}
+
+.post-link {
+    text-decoration: none;
+    color: #808080;
+}
+
+.post-link:hover {
+    color: #a9a9a9;
+}
+
+.dark-bg {
+    background-color: #0000008a;
+}
