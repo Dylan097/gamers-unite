@@ -19,7 +19,9 @@ body {
     background-color: #f0f8ff;
 }
 
-.card-body {
+.card-body,
+.masthead-text,
+.card h3 {
     font-family: 'kalam', cursive;
 }
 
