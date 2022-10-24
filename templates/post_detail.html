@@ -77,26 +77,26 @@
                     {% csrf_token %}
                     <button type="submit" class="btn btn-signup btn-lg">Comment</button>
                 </form>
-                {% else %}
-                <div class="col card mb-4 mt-3">
-                    <h3>Comments:</h3>
-                    <div class="card-body">
-                        {% for comment in comments %}
-                        <div class="comments" style="padding: 10px;">
-                            <p class="font-weight-bold">
-                                {{ comment.name }}
-                                <span class="text-muted font-weight-normal">
-                                    {{ comment.created_on }}
-                                </span> wrote:
-                            </p>
-                            {{ comment.body | linebreaks }}
-                        </div>
-                        {% endfor %}
-                    </div>
-                </div>
-                {% endif %}
             </div>
         </div>
+        {% else %}
+        <div class="col card mb-4 mt-3">
+            <h3>Comments:</h3>
+            <div class="card-body">
+                {% for comment in comments %}
+                <div class="comments" style="padding: 10px;">
+                    <p class="font-weight-bold">
+                        {{ comment.name }}
+                        <span class="text-muted font-weight-normal">
+                            {{ comment.created_on }}
+                        </span> wrote:
+                    </p>
+                    {{ comment.body | linebreaks }}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
     </div>
 </div>
 
