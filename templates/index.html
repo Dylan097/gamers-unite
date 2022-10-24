@@ -2,8 +2,12 @@
 
 {% block content %}
 <div class="container-fluid">
-    <div class="row">
-
+    <div class="row mt-5">
+        {% if user.is_authenticated %}
+        <div class="col-12">
+            <a href="#" class="btn btn-signup btn-lg">Create a Post!</a>
+        </div>
+        {% endif %}
         <!-- User Posts -->
         <div class="col-12 mt-2 left">
             <div class="row">
