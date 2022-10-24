@@ -191,6 +191,7 @@ These are the bugs found whilst programming
 1. Custom styles not working on the website
 2. Navbar moving upwards when there was a large number of comments
 3. Posts wouldn't load when clicked on
+4. **Leave a comment** card extended down past **comments** card.
 
 --- 
 
@@ -218,6 +219,15 @@ These are the fixes for each bug, in the same order as each bug found in [bugs f
     after that change, the navbar stays at the top of the page whenever the user scrolls down, making it easier for the user to navigate to the home page, or login/out
 
 3. Changed the file name from **post_details.html** to **post_detail.html**
+4. In **post_detail.html**, changed from 
+    ```html
+    <div class="col-md-4 card md-4 mt-3">
+    ```
+    to
+    ```html
+    <div class="col-md-4 card mb-4 mt-3">
+    ```
+    This minor change added a bottom margin to the **Leave a comment** card, which made this card in line with the **comments** card.
 
 [Back to Testing](#testing)   
 [Back to Contents](#contents)
