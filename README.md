@@ -190,6 +190,7 @@ These are the bugs found whilst programming
 
 1. Custom styles not working on the website
 2. Navbar moving upwards when there was a large number of comments
+3. Posts wouldn't load when clicked on
 
 --- 
 
@@ -215,6 +216,8 @@ These are the fixes for each bug, in the same order as each bug found in [bugs f
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark dark-bg">
     ```
     after that change, the navbar stays at the top of the page whenever the user scrolls down, making it easier for the user to navigate to the home page, or login/out
+
+3. Changed the file name from **post_details.html** to **post_detail.html**
 
 [Back to Testing](#testing)   
 [Back to Contents](#contents)
