@@ -3,8 +3,13 @@ body {
     background-size: cover;
 }
 
-.navbar {
+.navbar,
+.title-paragraph {
     font-family: 'Press Start 2P', cursive;
+}
+
+.title-paragraph {
+    font-size: 0.75rem;
 }
 
 .navbar-brand {
@@ -36,4 +41,18 @@ body {
 
 .dark-bg {
     background-color: #0000008a;
+}
+
+.btn-signup {
+    background-color: #ff0000;
+    color: white;
+    font-weight: 700;
+}
+
+.btn-signup:hover {
+    color: #000000;
+}
+
+.signup {
+    text-decoration: none;
 }

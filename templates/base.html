@@ -25,7 +25,7 @@
     <!-- Navigation -->
 
     <nav class="navbar sticky-top navbar-expand-lg navbar-dark dark-bg">
-        <a href="#" class="navbar-brand">Gamers Unite</a>
+        <a href="{% url 'home' %}" class="navbar-brand">Gamers Unite</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#toggler"
             aria-controls="toggle" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -33,14 +33,20 @@
         <div class="collapse navbar-collapse" id="toggler">
             <ul class="navbar-nav mr-auto mt-1 mt-lg-0">
                 <li class="nav-item">
-                    <a href="#" class="nav-link active">Home</a>
+                    <a href="{% url 'home' %}" class="nav-link active">Home</a>
+                </li>
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'account_signup' %}">Register</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">Register</a>
+                    <a class="nav-link" href="{% url 'account_login' %}">Login</a>
                 </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Login</a>
-                </li>
+                {% endif %}
             </ul>
         </div>
     </nav>
