@@ -186,9 +186,37 @@ These features are either partially implemented, or to be worked on in the futur
 This website was mostly tested manually. Therefore, below is bugs that had been found throughout the program, whether they were found before or after committing the changes to github.
 
 ### Bugs found
+These are the bugs found whilst programming 
+
+1. Custom styles not working on the website
+2. Navbar moving upwards when there was a large number of comments
 
 --- 
 
 ### Bugs Fixed
+These are the fixes for each bug, in the same order as each bug found in [bugs found](#bugs-found)
+
+1. In **settings.py**, I found 
+    ```python
+    STATICFILES_DIR = [os.path.join(BASE_DIR, 'static')]
+    ```
+    instead of 
+    ```python
+    STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+    ```
+    Once this had been fixed, my custom styles started to work
+
+2. In **base.html**, change
+    ```html
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark dark-bg">
+    ```
+    to
+    ```html
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark dark-bg">
+    ```
+    after that change, the navbar stays at the top of the page whenever the user scrolls down, making it easier for the user to navigate to the home page, or login/out
+
+[Back to Testing](#testing)   
+[Back to Contents](#contents)
 
 ---
