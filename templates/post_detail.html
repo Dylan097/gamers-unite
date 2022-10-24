@@ -4,7 +4,7 @@
 
 <div class="masthead">
     <div class="container">
-        <div class="row g-0">
+        <div class="row g-0 mt-5">
             <div class="col-md-6 masthead-text">
                 <!-- The title of the post -->
                 <h1 class="post-title">{{ post.title }}
@@ -14,7 +14,7 @@
                     {{ post.author }} | {{ post.created_on }}
                 </p>
             </div>
-            <div class="d-none d-md-block col-md-6 masthead-image">
+            <div class="d-md-block col-md-6 masthead-image">
                 {% if not "placeholder" in post.featured_image.url %}
                 <img src="{{ post.featured_image.url }}" width="100%">
                 {% endif %}
