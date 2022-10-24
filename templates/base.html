@@ -24,7 +24,7 @@
 
     <!-- Navigation -->
 
-    <nav class="navbar sticky-top navbar-expand-lg navbar-dark dark-bg">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark dark-bg">
         <a href="{% url 'home' %}" class="navbar-brand">Gamers Unite</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#toggler"
             aria-controls="toggle" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,7 +51,7 @@
         </div>
     </nav>
 
-    <main class="flex-shrink-0 main-bg">
+    <main class="flex-shrink-0 main-bg mt-5">
         {% block content %}
         <!-- Content here -->
         {% endblock %}
