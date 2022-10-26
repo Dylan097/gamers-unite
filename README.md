@@ -119,6 +119,7 @@ These are the colours used for the website, separated by each loacation used
 - `#ffffff` is used for each button press, e.g: create post link, submit buttons
 - `#000000` is used as a hover effect on each button
 - `#212529` is used for the text in every text that isn't colour customized
+- `#ff0000` is used as the colour of the like button, for its outline and its solid parts
 
 [Back to Website Design](#website-design)    
 [Back to Contents](#contents)
