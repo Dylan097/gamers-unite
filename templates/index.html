@@ -5,15 +5,15 @@
     <div class="row mt-5">
         {% if user.is_authenticated %}
         <div class="col-12">
-            <a href="#" class="btn btn-signup btn-lg">Create a Post!</a>
+            <a href="{% url 'new_post' %}" class="btn btn-signup btn-lg">Create a Post!</a>
         </div>
         {% endif %}
         <!-- User Posts -->
         <div class="col-12 mt-2 left">
             <div class="row">
                 {% for post in post_list %}
-                <div class="col-md-6">
-                    <div class="card mb-2">
+                <div class="col-10 offset-1 col-md-6 offset-md-0 col-lg-3 mt-2">
+                    <div class="card h-100">
                         <div class="card-body">
                             {% if "placeholder" in post.featured_image.url %}
                             <p class="author">{{ post.author }}</p>
@@ -27,7 +27,6 @@
                             {% endif %}
                             <a href="{% url 'post_detail' post.id %}" class="post-link">
                                 <h2 class="card-title">{{ post.title }}</h2>
-                                <p class="card-text">{{ post.excerpt }}</p>
                             </a>
                             <hr />
                             <p class="card-text text-muted h6">{{ post.created_on }} <i class="far fa-heart"></i>
@@ -39,7 +38,7 @@
                         </div>
                     </div>
                 </div>
-                {% if forloop.counter|divisibleby:2 %}
+                {% if forloop.counter|divisibleby:4 %}
             </div>
             <div class="row">
                 {% endif %}
