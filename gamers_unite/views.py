@@ -1,14 +1,14 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic, View
 from .models import Post
-from .forms import CommentForm
+from .forms import CommentForm, PostForm
 
 
 class PostList(generic.ListView):
     model = Post
     queryset = Post.objects.filter(status=1).order_by('-created_on')
     template_name = 'index.html'
-    paginate_by = 10
+    paginate_by = 8
 
 
 class PostDetail(View):
@@ -61,3 +61,28 @@ class PostDetail(View):
                 "comment_form": CommentForm()
             },
         )
+
+
+class NewPost(View):
+
+    def get(self, request):
+        return render(
+            request,
+            'new_post.html',
+            {
+                'new_post': PostForm(),
+            },
+        )
+
+    def post(self, request):
+        new_post = PostForm(data=request.POST)
+
+        if new_post.is_valid():
+            new_post.instance.email = request.user.email
+            new_post.instance.name = request.user.username
+            new_post.instance.author_id = request.user.id
+            new_post.save()
+        else:
+            new_post = PostForm()
+
+        return redirect('home')
