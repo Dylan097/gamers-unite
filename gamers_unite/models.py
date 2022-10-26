@@ -11,9 +11,8 @@ class Post(models.Model):
     updated_on = models.DateTimeField(auto_now=True)
     content = models.TextField()
     featured_image = CloudinaryField('image', default='placeholder')
-    excerpt = models.TextField(blank=True)
     created_on = models.DateTimeField(auto_now=True)
-    status = models.IntegerField(choices=STATUS, default=0)
+    status = models.IntegerField(choices=STATUS, default=1)
     approved = models.BooleanField(default=True)
     likes = models.ManyToManyField(User, related_name="gamers_likes", blank=True)
 
