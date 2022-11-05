@@ -1,4 +1,5 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, HttpResponseRedirect, reverse
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic, View
 from .models import Post
 from .forms import CommentForm, PostForm
@@ -63,7 +64,7 @@ class PostDetail(View):
         )
 
 
-class NewPost(View):
+class NewPost(LoginRequiredMixin, View):
 
     def get(self, request):
         return render(
@@ -86,3 +87,16 @@ class NewPost(View):
             new_post = PostForm()
 
         return redirect('home')
+
+
+class PostLike(View):
+
+    def post(self, request, id):
+        post = get_object_or_404(Post, id=id)
+
+        if post.likes.filter(id=request.user.id).exists():
+            post.likes.remove(request.user)
+        else:
+            post.likes.add(request.user)
+
+        return HttpResponseRedirect(reverse('post_detail', args=[id]))

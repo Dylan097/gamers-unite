@@ -60,3 +60,12 @@ body {
 .fa-heart {
     color: #ff0000;
 }
+
+.btn-like {
+    background: inherit;
+    border: none;
+}
+
+.btn-like .fa-heart:hover {
+    color: #ff000099;
+}

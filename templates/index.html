@@ -30,11 +30,7 @@
                             </a>
                             <hr />
                             <p class="card-text text-muted h6">{{ post.created_on }} <i class="far fa-heart"></i>
-                                {% if post.number_of_likes is None %}
-                                0
-                                {% else %}
-                                {{ post.number_of_likes }}
-                                {% endif %}</p>
+                                {{ post.num_of_likes }}</p>
                         </div>
                     </div>
                 </div>
