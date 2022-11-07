@@ -6,6 +6,7 @@
         {% if user.is_authenticated %}
         <div class="col-12">
             <a href="{% url 'new_post' %}" class="btn btn-signup btn-lg">Create a Post!</a>
+            <p class="logged-in-as">Logged in as {{ user.username }}</p>
         </div>
         {% endif %}
         <!-- User Posts -->
@@ -31,6 +32,10 @@
                             <hr />
                             <p class="card-text text-muted h6">{{ post.created_on }} <i class="far fa-heart"></i>
                                 {{ post.num_of_likes }}</p>
+                            {% ifequal user.id post.author_id %}
+                            <button class="edit-post"><a href="{% url 'edit_post' post.id %}">Edit
+                                    Post</a></button>
+                            {% endifequal %}
                         </div>
                     </div>
                 </div>

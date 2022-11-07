@@ -22,7 +22,6 @@
         </div>
     </div>
 </div>
-
 <div class="container">
     <div class="row">
         <div class="col card mb-4 mt-3 left top">
@@ -30,6 +29,9 @@
                 <p class="card-text">
                     {{ post.content | safe }}
                 </p>
+                {% ifequal user.id post.author_id %}
+                <button class="edit-post"><a href="{% url 'edit_post' post.id %}">Edit Post</a></button>
+                {% endifequal %}
                 <div class="row">
                     <div class="col-1">
                         <strong>
