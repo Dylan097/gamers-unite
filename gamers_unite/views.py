@@ -100,3 +100,21 @@ class PostLike(View):
             post.likes.add(request.user)
 
         return HttpResponseRedirect(reverse('post_detail', args=[id]))
+
+
+class EditPost(View, LoginRequiredMixin):
+
+    def get(self, request, id, *args, **kwargs):
+        queryset = Post.objects.filter(status=1)
+        post = get_object_or_404(queryset, id=id)
+        if post.author_id == self.request.user.id:
+            orginal_post = PostForm(instance=post)
+            return render(
+                request,
+                'edit_post.html',
+                {
+                    'post': orginal_post,
+                },
+            )
+        else:
+            return redirect('home')
