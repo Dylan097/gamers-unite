@@ -86,6 +86,10 @@
                         </span> wrote:
                     </p>
                     {{ comment.body | linebreaks }}
+                    {% ifequal user.id comment.creator_id %}
+                    <button class="edit-post"><a href="{% url 'edit_comment' post.id comment.id %}">Edit
+                            Comment</a></button>
+                    {% endifequal %}
                 </div>
                 {% endfor %}
             </div>
