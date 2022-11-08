@@ -3,17 +3,39 @@ body {
     background-size: cover;
 }
 
+/* Font Families */
+
 .navbar,
 .title-paragraph {
     font-family: 'Press Start 2P', cursive;
 }
 
-.title-paragraph {
-    font-size: 0.75rem;
+.card-body,
+.masthead-text,
+.card h3,
+.page-link {
+    font-family: 'kalam', cursive;
 }
+
+/* Navigation */
 
 .navbar-brand {
     font-size: 2.25rem;
+    margin-left: 0.5rem;
+}
+
+.dark-bg {
+    background-color: #0000008a;
+}
+
+.page-nav {
+    margin-bottom: 3rem;
+}
+
+/* Post Cards */
+
+.title-paragraph {
+    font-size: 0.75rem;
 }
 
 .author {
@@ -22,12 +44,6 @@ body {
 
 .card {
     background-color: #f0f8ff;
-}
-
-.card-body,
-.masthead-text,
-.card h3 {
-    font-family: 'kalam', cursive;
 }
 
 .post-link {
@@ -39,9 +55,7 @@ body {
     color: #a9a9a9;
 }
 
-.dark-bg {
-    background-color: #0000008a;
-}
+/* Buttons */
 
 .btn-signup {
     background-color: #ff0000;
@@ -71,15 +85,13 @@ body {
     border: none;
 }
 
-.edit-post {
-    border-radius: 0.25rem;
-}
-
 .btn-like .fa-heart:hover {
     color: #ff000099;
 }
 
-
+.edit-post {
+    border-radius: 0.25rem;
+}
 
 .edit-post a {
     color: #000000;
@@ -91,5 +103,21 @@ body {
 }
 
 .edit-post:hover {
+    border-style: inset;
+}
+
+.page-link {
+    background: inherit;
+    color: white;
+    font-weight: 600;
+    border-width: 0.15rem;
+    border-radius: 0.25rem;
+    border-style: outset;
+    top: 0.5rem;
+}
+
+.page-link:hover {
+    color: white;
+    background-color: inherit;
     border-style: inset;
 }
