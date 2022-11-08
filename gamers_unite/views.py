@@ -76,7 +76,7 @@ class NewPost(LoginRequiredMixin, View):
         )
 
     def post(self, request):
-        new_post = PostForm(data=request.POST)
+        new_post = PostForm(request.POST)
 
         if new_post.is_valid():
             new_post.instance.email = request.user.email
@@ -118,3 +118,15 @@ class EditPost(View, LoginRequiredMixin):
             )
         else:
             return redirect('home')
+
+    def post(self, request, id, *args, **kwargs):
+        queryset = Post.objects.filter(status=1)
+        post = get_object_or_404(queryset, id=id)
+        if post.author_id == self.request.user.id:
+            edited_post = PostForm(request.POST, request.FILES, instance=post)
+
+            if edited_post.is_valid():
+                edited_post.save()
+            else:
+                edited_post = PostForm(instance=post)
+        return redirect('home')
