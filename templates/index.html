@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="container-fluid">
-    <div class="row mt-5">
+    <div class="row mt-5 mb-5">
         {% if user.is_authenticated %}
         <div class="col-12">
             <a href="{% url 'new_post' %}" class="btn btn-signup btn-lg">Create a Post!</a>
@@ -33,8 +33,10 @@
                             <p class="card-text text-muted h6">{{ post.created_on }} <i class="far fa-heart"></i>
                                 {{ post.num_of_likes }}</p>
                             {% ifequal user.id post.author_id %}
-                            <button class="edit-post"><a href="{% url 'edit_post' post.id %}">Edit
+                            <button class="btn p-1"><a href="{% url 'edit_post' post.id %}"
+                                    class="btn btn-signup btn-sm">Edit
                                     Post</a></button>
+                            <button class="btn p-1"><a href="#" class="btn btn-signup btn-sm">Delete Post</a></button>
                             {% endifequal %}
                         </div>
                     </div>

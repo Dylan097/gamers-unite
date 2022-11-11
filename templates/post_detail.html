@@ -30,7 +30,9 @@
                     {{ post.content | safe }}
                 </p>
                 {% ifequal user.id post.author_id %}
-                <button class="edit-post"><a href="{% url 'edit_post' post.id %}">Edit Post</a></button>
+                <button class="btn py-0 px-1"><a href="{% url 'edit_post' post.id %}" class="btn btn-signup btn-sm">Edit
+                        Post</a></button>
+                <button class="btn py-0 px-1"><a href="#" class="btn btn-signup btn-sm">Delete Post</a></button>
                 {% endifequal %}
                 <div class="row">
                     <div class="col-1">
@@ -87,7 +89,10 @@
                     </p>
                     {{ comment.body | linebreaks }}
                     {% ifequal user.id comment.creator_id %}
-                    <button class="edit-post"><a href="{% url 'edit_comment' post.id comment.id %}">Edit
+                    <button class="btn p-0"><a href="{% url 'edit_comment' post.id comment.id %}"
+                            class="btn btn-signup btn-sm px-1 py-0">Edit
+                            Comment</a></button>
+                    <button class="btn p-0"><a href="#" class="btn btn-signup btn-sm px-1 py-0">Delete
                             Comment</a></button>
                     {% endifequal %}
                 </div>
