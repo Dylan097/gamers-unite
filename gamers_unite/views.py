@@ -178,3 +178,17 @@ class EditComment(View):
             comment_form = CommentForm()
 
         return redirect('post_detail', id)
+
+
+class Delete(View):
+    def get(self, request, id, comment_id, model):
+        if model == 'Post':
+            post = get_object_or_404(Post, id=id)
+            if post.author_id == self.request.user.id:
+                post.delete()
+            return redirect('home')
+        elif model == 'Comment':
+            comment = get_object_or_404(Comment, id=comment_id)
+            if comment.creator_id == self.request.user.id:
+                comment.delete()
+            return redirect('post_detail', id)
