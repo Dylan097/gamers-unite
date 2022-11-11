@@ -30,8 +30,8 @@
                     {{ post.content | safe }}
                 </p>
                 {% ifequal user.id post.author_id %}
-                <div class="modal fade" id="modal-{{ post.id }}" tabindex="-1" aria-labelledby="deleteWarningLabel"
-                    aria-hidden="true">
+                <div class="modal fade" id="modal-{{ post.id }}" data-bs-backdrop="static" data-bs-keyboard="false"
+                    tabindex="-1" aria-labelledby="deleteWarningLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -107,8 +107,8 @@
                     </p>
                     {{ comment.body | linebreaks }}
                     {% ifequal user.id comment.creator_id %}
-                    <div class="modal fade" id="modal-{{ post.id }}-{{comment.id}}" tabindex="-1"
-                        aria-labelledby="deleteWarningLabel" aria-hidden="true">
+                    <div class="modal fade" id="modal-{{ post.id }}-{{comment.id}}" data-bs-backdrop="static"
+                        data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteWarningLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -127,9 +127,9 @@
                         </div>
                     </div>
                     <button class="btn p-0"><a href="{% url 'edit_comment' post.id comment.id %}"
-                            class="btn btn-signup btn-sm px-1 py-0">Edit
+                            class="btn btn-signup btn-sm p-1">Edit
                             Comment</a></button>
-                    <button class="btn p-0 btn-signup btn-sm" data-bs-toggle="modal"
+                    <button class="btn p-1 btn-signup btn-sm" data-bs-toggle="modal"
                         data-bs-target="#modal-{{ post.id }}-{{ comment.id }}">Delete
                         Comment</button>
                     {% endifequal %}
