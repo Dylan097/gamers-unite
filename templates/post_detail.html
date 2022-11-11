@@ -32,7 +32,8 @@
                 {% ifequal user.id post.author_id %}
                 <button class="btn py-0 px-1"><a href="{% url 'edit_post' post.id %}" class="btn btn-signup btn-sm">Edit
                         Post</a></button>
-                <button class="btn py-0 px-1"><a href="#" class="btn btn-signup btn-sm">Delete Post</a></button>
+                <button class="btn py-0 px-1"><a href="{% url 'delete' post.id 0 'Post' %}"
+                        class="btn btn-signup btn-sm">Delete Post</a></button>
                 {% endifequal %}
                 <div class="row">
                     <div class="col-1">
@@ -92,7 +93,8 @@
                     <button class="btn p-0"><a href="{% url 'edit_comment' post.id comment.id %}"
                             class="btn btn-signup btn-sm px-1 py-0">Edit
                             Comment</a></button>
-                    <button class="btn p-0"><a href="#" class="btn btn-signup btn-sm px-1 py-0">Delete
+                    <button class="btn p-0"><a href="{% url 'delete' post.id comment.id 'Comment' %}"
+                            class="btn btn-signup btn-sm px-1 py-0">Delete
                             Comment</a></button>
                     {% endifequal %}
                 </div>

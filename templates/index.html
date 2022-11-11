@@ -36,7 +36,8 @@
                             <button class="btn p-1"><a href="{% url 'edit_post' post.id %}"
                                     class="btn btn-signup btn-sm">Edit
                                     Post</a></button>
-                            <button class="btn p-1"><a href="#" class="btn btn-signup btn-sm">Delete Post</a></button>
+                            <button class="btn p-1"><a href="{% url 'delete' post.id 0 'Post' %}"
+                                    class="btn btn-signup btn-sm">Delete Post</a></button>
                             {% endifequal %}
                         </div>
                     </div>
