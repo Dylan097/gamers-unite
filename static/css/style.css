@@ -66,8 +66,7 @@ body {
     color: #000000;
 }
 
-.signup,
-.edit-post a {
+.signup {
     text-decoration: none;
 }
 
@@ -75,34 +74,13 @@ body {
     color: #ff0000;
 }
 
-.btn-like,
-.edit-post {
-    background: inherit;
-}
-
 .btn-like {
+    background: inherit;
     border: none;
 }
 
 .btn-like .fa-heart:hover {
     color: #ff000099;
-}
-
-.edit-post {
-    border-radius: 0.25rem;
-}
-
-.edit-post a {
-    color: #000000;
-    font-size: 1.05rem;
-}
-
-.edit-post a:hover {
-    color: #000000aa;
-}
-
-.edit-post:hover {
-    border-style: inset;
 }
 
 .page-link {
