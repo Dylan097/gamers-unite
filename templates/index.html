@@ -33,8 +33,9 @@
                             <p class="card-text text-muted h6">{{ post.created_on }} <i class="far fa-heart"></i>
                                 {{ post.num_of_likes }}</p>
                             {% ifequal user.id post.author_id %}
-                            <div class="modal fade" id="modal-{{ post.id }}" tabindex="-1"
-                                aria-labelledby="deleteWarningLabel" aria-hidden="true">
+                            <div class="modal fade" id="modal-{{ post.id }}" data-bs-backdrop="static"
+                                data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteWarningLabel"
+                                aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
