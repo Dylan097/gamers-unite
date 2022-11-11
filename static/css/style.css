@@ -12,8 +12,9 @@ body {
 
 .card-body,
 .masthead-text,
-.card h3,
-.page-link {
+h3,
+.page-link,
+.modal-body {
     font-family: 'kalam', cursive;
 }
 
