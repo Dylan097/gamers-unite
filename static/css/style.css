@@ -20,7 +20,6 @@ body {
 /* Navigation */
 
 .navbar-brand {
-    font-size: 2.25rem;
     margin-left: 0.5rem;
 }
 
@@ -120,4 +119,12 @@ body {
     color: white;
     background-color: inherit;
     border-style: inset;
+}
+
+/* Media Queries */
+
+@media (min-width: 576px) {
+    .navbar-brand {
+        font-size: 2.25rem;
+    }
 }
