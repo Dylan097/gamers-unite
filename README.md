@@ -30,8 +30,8 @@
         - [Implemented Features](#implemented-features)
         - [Future Features](#future-features)
     - [Testing](#testing)
-        - [Bugs Found](#bugs-found)
-        - [Bugs Fixed](#bugs-fixed)
+        - [Bugs Found](/BUGS.md#bugs-found)
+        - [Bugs Fixed](/BUGS.md#bugs-fixed)
 
 ---
 ## Objective
@@ -164,8 +164,12 @@ These features are fully implemented
 - Registration - Register for an account, which'll eventually allow the user to post, comment, like other's posts and follow other users
 - Login - Login to an account as a user to be able to post, comment, like posts and follow other users when implemented
 - Logout - Logout of an account so that if a computer is shared, someone else doesn't have access to your account
+- Create a post - Post what game you're playing, and about what you enjoy playing
+- Like/ unlike - Like a post by another user to show you like the game they're playing/ talking about, or unlike it for accidental likes
 - Viewing Posts - View a posts contents and comments
 - Comment on a post - Comment on posts so you can show what you're thinking
+- Edit a Post/Comment - Edit a Post/Comment that may have a typo or additions that have been forgotten
+- Delete a Post/Comment - Delete a Post/Comment that may have been posted accidentally, or that is no longer wanted
 
 ---
 
@@ -173,8 +177,6 @@ These features are fully implemented
 
 These features are either partially implemented, or to be worked on in the future
 
-- Create a post - Post what game you're playing, and about what you enjoy playing
-- Like/ unlike - Like a post by another user to show you like the game they're playing/ talking about, or unlike it for accidental likes
 - Create a user profile - Create a bio to tell people a little bit about yourself and add a picture of yourself. A profile will also contain each post created by the user
 - Follow a user - Follow a user so that you can view that users posts before any others
   
@@ -184,53 +186,10 @@ These features are either partially implemented, or to be worked on in the futur
 
 ## Testing
 
-This website was mostly tested manually. Therefore, below is bugs that had been found throughout the program, whether they were found before or after committing the changes to github.
+This website was mostly tested manually. As there is an extensive explanation on how I fixed bugs, I have put all bugs in a separate file, links below:
 
-### Bugs found
-These are the bugs found whilst programming 
+[Bugs Found](/BUGS.md#bugs-found)   
+[Bugs Fixed](/BUGS.md#bugs-fixed)
 
-1. Custom styles not working on the website
-2. Navbar moving upwards when there was a large number of comments
-3. Posts wouldn't load when clicked on
-4. **Leave a comment** card extended down past **comments** card.
-
---- 
-
-### Bugs Fixed
-These are the fixes for each bug, in the same order as each bug found in [bugs found](#bugs-found)
-
-1. In **settings.py**, I found 
-    ```python
-    STATICFILES_DIR = [os.path.join(BASE_DIR, 'static')]
-    ```
-    instead of 
-    ```python
-    STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-    ```
-    Once this had been fixed, my custom styles started to work
-
-2. In **base.html**, change
-    ```html
-    <nav class="navbar sticky-top navbar-expand-lg navbar-dark dark-bg">
-    ```
-    to
-    ```html
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark dark-bg">
-    ```
-    after that change, the navbar stays at the top of the page whenever the user scrolls down, making it easier for the user to navigate to the home page, or login/out
-
-3. Changed the file name from **post_details.html** to **post_detail.html**
-4. In **post_detail.html**, changed from 
-    ```html
-    <div class="col-md-4 card md-4 mt-3">
-    ```
-    to
-    ```html
-    <div class="col-md-4 card mb-4 mt-3">
-    ```
-    This minor change added a bottom margin to the **Leave a comment** card, which made this card in line with the **comments** card.
-
-[Back to Testing](#testing)   
-[Back to Contents](#contents)
 
 ---
