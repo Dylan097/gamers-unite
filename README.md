@@ -92,6 +92,7 @@ Based on the user stories, optional additions which I will attempt to add to add
 - >Creating a user profile
     - >Viewing a user profile
     - >Viewing posts by individual users
+
 All optional additions I will attempt to add to the final product before submission. Anything not added on final submission, will be added to [Future Ideas]()
 
 [Back to contents](#contents)
