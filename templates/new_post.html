@@ -7,7 +7,7 @@
             <div class="card-body">
                 <h3>Create a new post:</h3>
                 <p>Posting as {{ user.username }}</p>
-                <form method="post">
+                <form method="post" enctype="multipart/form-data">
                     {{ new_post | crispy }}
                     {% csrf_token %}
                     <button type="submit" class="btn btn-signup btn-lg mt-2">Create Post</button>
