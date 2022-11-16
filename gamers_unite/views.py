@@ -77,7 +77,7 @@ class NewPost(LoginRequiredMixin, View):
         )
 
     def post(self, request):
-        new_post = PostForm(request.POST)
+        new_post = PostForm(request.POST, request.FILES)
 
         if new_post.is_valid():
             new_post.instance.email = request.user.email
