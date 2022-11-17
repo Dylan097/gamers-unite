@@ -149,7 +149,7 @@ class EditComment(View):
 
             return render(
                 request,
-                "post_detail.html",
+                "edit_comment.html",
                 {
                     "post": post,
                     "comments": comments,
