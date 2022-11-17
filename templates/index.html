@@ -35,7 +35,7 @@
                                 {{ post.num_of_likes }}</p>
                             {% ifequal user.id post.author_id %}
                             <div class="modal fade" id="modal-{{ post.id }}" data-bs-backdrop="static"
-                                data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteWarningLabel"
+                                data-bs-keyboard="false" tabindex="-1" aria-labelledby="delete-{{ post.id }}"
                                 aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
@@ -54,17 +54,16 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
                                                 aria-label="cancel">Cancel</button>
-                                            <button type="button" class="btn p-0"><a
-                                                    href="{% url 'delete' post.id 0 'Post' %}" class="btn btn-signup"
-                                                    aria-label="Delete">Delete</a></button>
+                                            <a href="{% url 'delete' post.id 0 'Post' %}" class="btn btn-signup"
+                                                aria-label="Delete">Delete</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <button class="btn p-1"><a href="{% url 'edit_post' post.id %}"
-                                    class="btn btn-signup btn-sm" aria-label="Edit post">Edit
-                                    Post</a></button>
-                            <button class="btn p-1 btn-signup btn-sm" data-bs-toggle="modal"
+                            <a href="{% url 'edit_post' post.id %}" class="btn btn-signup btn-sm"
+                                aria-label="Edit post">Edit
+                                Post</a>
+                            <button class="btn btn-signup btn-sm" id="delete-{{ post.id }}" data-bs-toggle="modal"
                                 data-bs-target="#modal-{{ post.id }}" aria-label="Delete post">Delete Post</button>
                             {% endifequal %}
                         </div>

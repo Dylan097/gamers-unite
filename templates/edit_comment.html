@@ -47,43 +47,40 @@
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
                                     aria-label="cancel">Cancel</button>
-                                <button type="button" class="btn p-0"><a href="{% url 'delete' post.id 0 'Post' %}"
-                                        class="btn btn-signup" aria-label="Delete">Delete</a></button>
+                                <a href="{% url 'delete' post.id 0 'Post' %}" class="btn btn-signup"
+                                    aria-label="Delete">Delete</a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <button class="btn py-0 px-1"><a href="{% url 'edit_post' post.id %}" class="btn btn-signup btn-sm"
-                        aria-label="Edit post">Edit
-                        Post</a></button>
+                <a href="{% url 'edit_post' post.id %}" class="btn btn-signup btn-sm" aria-label="Edit post">Edit
+                    Post</a>
                 <button class="btn btn-signup btn-sm" data-bs-toggle="modal" data-bs-target="#modal-{{ post.id }}"
                     aria-label="Delete post">Delete Post</button>
                 {% endifequal %}
                 <div class="row">
-                    <div class="col-1">
-                        <strong>
-                            {% if user.is_authenticated %}
-                            <form action="{% url 'post_like' post.id %}" method="POST" class="d-inline">
-                                {% csrf_token %}
-                                {% if liked %}
+                    <div class="col-3 col-md-2 col-lg-3">
+                        {% if user.is_authenticated %}
+                        <form action="{% url 'post_like' post.id %}" method="POST" class="d-inline">
+                            {% csrf_token %}
+                            {% if liked %}
 
-                                <button type="submit" class="btn-like" name="gamers_unite_id" value="{{ post.id }}"
-                                    aria-label="Unlike"><i class="fas fa-heart"></i></button>
+                            <button type="submit" class="btn-like" name="gamers_unite_id" value="{{ post.id }}"
+                                aria-label="Unlike"><i class="fas fa-heart"></i></button>
 
-                                {% else %}
-
-                                <button type="submit" class="btn-like" name="gamers_unite_id" value="{{ post.id }}"
-                                    aria-label="Like"><i class="far fa-heart"></i></button>
-
-                                {% endif %}
-                            </form>
                             {% else %}
-                            <span><i class="far fa-heart"></i></span>
+
+                            <button type="submit" class="btn-like" name="gamers_unite_id" value="{{ post.id }}"
+                                aria-label="Like"><i class="far fa-heart"></i></button>
+
                             {% endif %}
-                            <span>{{ post.num_of_likes }}</span>
-                        </strong>
+                        </form>
+                        {% else %}
+                        <span><i class="far fa-heart"></i></span>
+                        {% endif %}
+                        <span>{{ post.num_of_likes }}</span>
                     </div>
-                    <div class="col-1">
+                    <div class="col-3 col-md-2 col-lg-3">
                         {% with comments.count as total_comments %}
                         <strong><i class="far fa-comments"></i>
                             {{ total_comments }}
@@ -114,7 +111,8 @@
                     {{ comment.body | linebreaks }}
                     {% ifequal user.id comment.creator_id %}
                     <div class="modal fade" id="modal-{{ post.id }}-{{comment.id}}" data-bs-backdrop="static"
-                        data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteWarningLabel" aria-hidden="true">
+                        data-bs-keyboard="false" tabindex="-1" aria-labelledby="delete-{{ post.id }}-{{ comment.id }}"
+                        aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -130,18 +128,18 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
                                         aria-label="cancel">Cancel</button>
-                                    <button type="button" class="btn p-0"><a
-                                            href="{% url 'delete' post.id comment.id 'Comment' %}"
-                                            class="btn btn-signup" aria-label="Delete">Delete</a></button>
+                                    <a href="{% url 'delete' post.id comment.id 'Comment' %}" class="btn btn-signup"
+                                        aria-label="Delete">Delete</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <button class="btn p-0"><a href="{% url 'edit_comment' post.id comment.id %}"
-                            class="btn btn-signup btn-sm p-1" aria-label="Edit comment">Edit
-                            Comment</a></button>
-                    <button class="btn p-1 btn-signup btn-sm" data-bs-toggle="modal"
-                        data-bs-target="#modal-{{ post.id }}-{{ comment.id }}" aria-label="Delete comment">Delete
+                    <a href="{% url 'edit_comment' post.id comment.id %}" class="btn btn-signup btn-sm p-1"
+                        aria-label="Edit comment">Edit
+                        Comment</a>
+                    <button class="btn p-1 btn-signup btn-sm" id="delete-{{ post.id }}-{{ comment.id }}"
+                        data-bs-toggle="modal" data-bs-target="#modal-{{ post.id }}-{{ comment.id }}"
+                        aria-label="Delete comment">Delete
                         Comment</button>
                     {% endifequal %}
                 </div>
