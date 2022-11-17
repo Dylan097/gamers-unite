@@ -50,6 +50,11 @@ h3,
     color: #a9a9a9;
 }
 
+.card-img-top {
+    width: auto;
+    max-width: 100%;
+}
+
 /* Buttons */
 
 .btn-signup {
