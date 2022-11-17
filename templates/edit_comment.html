@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load crispy_forms_tags %}
+
+<div class="masthead">
+    <div class="container">
+        <div class="row g-0 mt-5">
+            <div class="col-md-6 masthead-text">
+                <!-- The title of the post -->
+                <h1 class="post-title">{{ post.title }}
+                </h1>
+                <!-- Post Author | Post created date and time -->
+                <p class="post-subtitle">
+                    {{ post.author }} | {{ post.created_on }}
+                </p>
+            </div>
+            <div class="d-md-block col-md-6 masthead-image">
+                {% if not "placeholder" in post.featured_image.url %}
+                <img src="{{ post.featured_image.url }}" width="100%">
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col card mb-4 mt-3 left top">
+            <div class="card-body">
+                <p class="card-text">
+                    {{ post.content | safe }}
+                </p>
+                {% ifequal user.id post.author_id %}
+                <div class="modal fade" id="modal-{{ post.id }}" data-bs-backdrop="static" data-bs-keyboard="false"
+                    tabindex="-1" aria-labelledby="deleteWarningLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3 class="modal-title"><i class="fa-solid fa-triangle-exclamation"></i> Warning!</h3>
+                            </div>
+                            <div class="modal-body">Are you sure you want to delete this post?</div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                                    aria-label="cancel">Cancel</button>
+                                <button type="button" class="btn p-0"><a href="{% url 'delete' post.id 0 'Post' %}"
+                                        class="btn btn-signup">Delete</a></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn py-0 px-1"><a href="{% url 'edit_post' post.id %}" class="btn btn-signup btn-sm">Edit
+                        Post</a></button>
+                <button class="btn btn-signup btn-sm" data-bs-toggle="modal"
+                    data-bs-target="#modal-{{ post.id }}">Delete Post</button>
+                {% endifequal %}
+                <div class="row">
+                    <div class="col-1">
+                        <strong>
+                            {% if user.is_authenticated %}
+                            <form action="{% url 'post_like' post.id %}" method="POST" class="d-inline">
+                                {% csrf_token %}
+                                {% if liked %}
+
+                                <button type="submit" class="btn-like" name="gamers_unite_id" value="{{ post.id }}"><i
+                                        class="fas fa-heart"></i></button>
+
+                                {% else %}
+
+                                <button type="submit" class="btn-like" name="gamers_unite_id" value="{{ post.id }}"><i
+                                        class="far fa-heart"></i></button>
+
+                                {% endif %}
+                            </form>
+                            {% else %}
+                            <span class="text-secondary"><i class="far fa-heart"></i></span>
+                            {% endif %}
+                            <span class="text-secondary">{{ post.num_of_likes }}</span>
+                        </strong>
+                    </div>
+                    <div class="col-1">
+                        {% with comments.count as total_comments %}
+                        <strong class="text-secondary"><i class="far fa-comments"></i>
+                            {{ total_comments }}
+                        </strong>
+                        {% endwith %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 card mb-4 mt-3">
+            <div class="card-body">
+                <h3>Comments:</h3>
+                {% for comment in comments %}
+                <div class="comments" style="padding: 10px;">
+                    <p class="font-weight-bold">
+                        {{ comment.name }}
+                        <span class="text-muted font-weight-normal">
+                            {{ comment.created_on }}
+                        </span> wrote:
+                    </p>
+                    {{ comment.body | linebreaks }}
+                    {% ifequal user.id comment.creator_id %}
+                    <div class="modal fade" id="modal-{{ post.id }}-{{comment.id}}" data-bs-backdrop="static"
+                        data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteWarningLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h3 class="modal-title"><i class="fa-solid fa-triangle-exclamation"></i> Warning!
+                                    </h3>
+                                </div>
+                                <div class="modal-body">Are you sure you want to delete this comment?</div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                                        aria-label="cancel">Cancel</button>
+                                    <button type="button" class="btn p-0"><a
+                                            href="{% url 'delete' post.id comment.id 'Comment' %}"
+                                            class="btn btn-signup">Delete</a></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn p-0"><a href="{% url 'edit_comment' post.id comment.id %}"
+                            class="btn btn-signup btn-sm p-1">Edit
+                            Comment</a></button>
+                    <button class="btn p-1 btn-signup btn-sm" data-bs-toggle="modal"
+                        data-bs-target="#modal-{{ post.id }}-{{ comment.id }}">Delete
+                        Comment</button>
+                    {% endifequal %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-md-4 card mb-4 mt-3">
+            <div class="card-body">
+                <h3>Leave a comment:</h3>
+                <p>Posting as: {{ user.username }}</p>
+                <form method="post">
+                    {{ comment_form | crispy }}
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-signup btn-lg">Edit Comment</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
