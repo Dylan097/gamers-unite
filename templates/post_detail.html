@@ -49,15 +49,16 @@
                                 <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
                                     aria-label="cancel">Cancel</button>
                                 <button type="button" class="btn p-0"><a href="{% url 'delete' post.id 0 'Post' %}"
-                                        class="btn btn-signup">Delete</a></button>
+                                        class="btn btn-signup" aria-label="Delete">Delete</a></button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <button class="btn py-0 px-1"><a href="{% url 'edit_post' post.id %}" class="btn btn-signup btn-sm">Edit
+                <button class="btn py-0 px-1"><a href="{% url 'edit_post' post.id %}" class="btn btn-signup btn-sm"
+                        aria-label="Edit post">Edit
                         Post</a></button>
-                <button class="btn btn-signup btn-sm" data-bs-toggle="modal"
-                    data-bs-target="#modal-{{ post.id }}">Delete Post</button>
+                <button class="btn btn-signup btn-sm" data-bs-toggle="modal" data-bs-target="#modal-{{ post.id }}"
+                    aria-label="Delete post">Delete Post</button>
                 {% endifequal %}
                 <div class="row">
                     <div class="col-1">
@@ -67,13 +68,13 @@
                                 {% csrf_token %}
                                 {% if liked %}
 
-                                <button type="submit" class="btn-like" name="gamers_unite_id" value="{{ post.id }}"><i
-                                        class="fas fa-heart"></i></button>
+                                <button type="submit" class="btn-like" name="gamers_unite_id" value="{{ post.id }}"
+                                    aria-label="Unlike"><i class="fas fa-heart"></i></button>
 
                                 {% else %}
 
-                                <button type="submit" class="btn-like" name="gamers_unite_id" value="{{ post.id }}"><i
-                                        class="far fa-heart"></i></button>
+                                <button type="submit" class="btn-like" name="gamers_unite_id" value="{{ post.id }}"
+                                    aria-label="Like"><i class="far fa-heart"></i></button>
 
                                 {% endif %}
                             </form>
@@ -134,16 +135,16 @@
                                         aria-label="cancel">Cancel</button>
                                     <button type="button" class="btn p-0"><a
                                             href="{% url 'delete' post.id comment.id 'Comment' %}"
-                                            class="btn btn-signup">Delete</a></button>
+                                            class="btn btn-signup" aria-label="Delete">Delete</a></button>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <button class="btn p-0"><a href="{% url 'edit_comment' post.id comment.id %}"
-                            class="btn btn-signup btn-sm p-1">Edit
+                            class="btn btn-signup btn-sm p-1" aria-label="Edit comment">Edit
                             Comment</a></button>
                     <button class="btn p-1 btn-signup btn-sm" data-bs-toggle="modal"
-                        data-bs-target="#modal-{{ post.id }}-{{ comment.id }}">Delete
+                        data-bs-target="#modal-{{ post.id }}-{{ comment.id }}" aria-label="Delete comment">Delete
                         Comment</button>
                     {% endifequal %}
                 </div>
@@ -157,7 +158,7 @@
                 <form method="post">
                     {{ comment_form | crispy }}
                     {% csrf_token %}
-                    <button type="submit" class="btn btn-signup btn-lg">Comment</button>
+                    <button type="submit" class="btn btn-signup btn-lg" aria-label="Submit comment">Comment</button>
                 </form>
             </div>
         </div>

@@ -56,16 +56,16 @@
                                                     aria-label="cancel">Cancel</button>
                                                 <button type="button" class="btn p-0"><a
                                                         href="{% url 'delete' post.id 0 'Post' %}"
-                                                        class="btn btn-signup">Delete</a></button>
+                                                        class="btn btn-signup" aria-label="Delete">Delete</a></button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <button class="btn p-1"><a href="{% url 'edit_post' post.id %}"
-                                        class="btn btn-signup btn-sm">Edit
+                                        class="btn btn-signup btn-sm" aria-label="Edit post">Edit
                                         Post</a></button>
                                 <button class="btn p-1 btn-signup btn-sm" data-bs-toggle="modal"
-                                    data-bs-target="#modal-{{ post.id }}">Delete Post</button>
+                                    data-bs-target="#modal-{{ post.id }}" aria-label="Delete post">Delete Post</button>
                                 {% endifequal %}
                         </div>
                     </div>
@@ -82,10 +82,12 @@
     <nav aria-label="Page navigation" class="page-nav">
         <ul class="pagination justify-content-center">
             {% if page_obj.has_previous %}
-            <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV</a></li>
+            <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link" aria-label="Previous page">&laquo;
+                    PREV</a></li>
             {% endif %}
             {% if page_obj.has_next %}
-            <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
+            <li><a href="?page={{ page_obj.next_page_number }}" class="page-link" aria-label="Next page"> NEXT
+                    &raquo;</a></li>
             {% endif %}
         </ul>
     </nav>
