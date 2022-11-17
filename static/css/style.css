@@ -51,7 +51,8 @@ h3,
     color: #a9a9a9;
 }
 
-.card-img-top {
+img {
+    max-height: 50vh;
     width: auto;
     max-width: 100%;
 }
