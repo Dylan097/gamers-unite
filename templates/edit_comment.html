@@ -31,7 +31,7 @@
                 </p>
                 {% ifequal user.id post.author_id %}
                 <div class="modal fade" id="modal-{{ post.id }}" data-bs-backdrop="static" data-bs-keyboard="false"
-                    tabindex="-1" aria-labelledby="deleteWarningLabel" aria-hidden="true">
+                    tabindex="-1" aria-labelledby="delete-{{ post.id }}" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -55,8 +55,8 @@
                 </div>
                 <a href="{% url 'edit_post' post.id %}" class="btn btn-signup btn-sm" aria-label="Edit post">Edit
                     Post</a>
-                <button class="btn btn-signup btn-sm" data-bs-toggle="modal" data-bs-target="#modal-{{ post.id }}"
-                    aria-label="Delete post">Delete Post</button>
+                <button class="btn btn-signup btn-sm" id="delete-{{ post.id }}" data-bs-toggle="modal"
+                    data-bs-target="#modal-{{ post.id }}" aria-label="Delete post">Delete Post</button>
                 {% endifequal %}
                 <div class="row">
                     <div class="col-3 col-md-2 col-lg-3">
