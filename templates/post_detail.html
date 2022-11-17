@@ -16,7 +16,8 @@
             </div>
             <div class="d-md-block col-md-6 masthead-image">
                 {% if not "placeholder" in post.featured_image.url %}
-                <img src="{{ post.featured_image.url }}" height="240vh" width="auto">
+                <img src="{{ post.featured_image.url }}" alt="{{ post.author }}'s posted image" height="240vh"
+                    width="auto">
                 {% endif %}
             </div>
         </div>

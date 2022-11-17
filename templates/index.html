@@ -23,7 +23,8 @@
                                 <div class="image-flash">
                                     <p class="author">{{ post.author }}</p>
                                 </div>
-                                <img src=" {{ post.featured_image.url }} " class="card-img-top" max-height="240vh">
+                                <img src=" {{ post.featured_image.url }} " class="card-img-top"
+                                    alt="{{ post.author }}'s posted image" max-height="240vh">
                             </div>
                             {% endif %}
                             <a href="{% url 'post_detail' post.id %}" class="post-link">
