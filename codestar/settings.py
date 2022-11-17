@@ -32,7 +32,7 @@ DEBUG = False
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
-ALLOWED_HOSTS = ['gamers-unite-eu.herokuapp.com', 'localhost', 'ui.dev/amiresponsive?url=https://gamers-unite-eu.herokuapp.com/']
+ALLOWED_HOSTS = ['gamers-unite-eu.herokuapp.com', 'localhost']
 
 
 # Application definition
