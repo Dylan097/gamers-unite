@@ -103,7 +103,7 @@
     <div class="row">
         <div class="col-md-8 card mb-4 mt-3">
             <div class="card-body">
-                <h3>Comments:</h3>
+                <h2>Comments:</h2>
                 {% for comment in comments %}
                 <div class="comments" style="padding: 10px;">
                     <p class="font-weight-bold">
@@ -151,7 +151,7 @@
         </div>
         <div class="col-md-4 card mb-4 mt-3">
             <div class="card-body">
-                <h3>Leave a comment:</h3>
+                <h2>Edit a comment:</h2>
                 <p>Posting as: {{ user.username }}</p>
                 <form method="post">
                     {{ comment_form | crispy }}
