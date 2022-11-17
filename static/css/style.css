@@ -101,7 +101,8 @@ h3,
     border-style: inset;
 }
 
-.col-md-8 p a {
+.col-md-8 p a,
+#div_id_featured_image div a {
     background-color: #ffffff;
     color: #0250C5;
 }
