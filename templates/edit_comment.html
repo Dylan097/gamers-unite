@@ -78,14 +78,14 @@
                                 {% endif %}
                             </form>
                             {% else %}
-                            <span class="text-secondary"><i class="far fa-heart"></i></span>
+                            <span><i class="far fa-heart"></i></span>
                             {% endif %}
-                            <span class="text-secondary">{{ post.num_of_likes }}</span>
+                            <span>{{ post.num_of_likes }}</span>
                         </strong>
                     </div>
                     <div class="col-1">
                         {% with comments.count as total_comments %}
-                        <strong class="text-secondary"><i class="far fa-comments"></i>
+                        <strong><i class="far fa-comments"></i>
                             {{ total_comments }}
                         </strong>
                         {% endwith %}
@@ -107,7 +107,7 @@
                 <div class="comments" style="padding: 10px;">
                     <p class="font-weight-bold">
                         {{ comment.name }}
-                        <span class="text-muted font-weight-normal">
+                        <span class="font-weight-normal">
                             {{ comment.created_on }}
                         </span> wrote:
                     </p>
