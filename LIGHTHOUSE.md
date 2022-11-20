@@ -38,6 +38,19 @@
                 - [Login page](#login-page)
                 - [Logout page](#logout-page)
                 - [Signup page](#signup-page)
+        - [Manual testing](/README.md#manual-testing)
+            - [Improvements made](/README.md#improvements-made)
+        - [Responsive testing](/README.md#responsive-testing)
+            - [Mobile](/README.md#mobile)
+            - [Tablet](/README.md#tablet)
+            - [Laptop](/README.md#laptop)
+            - [Desktop](/README.md#desktop)
+        - [HTML Testing](/README.md#html-testing)
+            - [Webpage Links](/README.md#webpage-links)
+            - [Textarea](/README.md#textarea)
+        - [CSS Testing](/README.md#css-testing)
+    - [Deployment Steps](/README.md#deployment-steps)
+    - [Credits](/README.md#credits)
 
 ---
 
