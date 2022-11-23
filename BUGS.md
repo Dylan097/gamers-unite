@@ -64,6 +64,7 @@ These are the bugs found whilst programming
 7. **Delete** function would just return to the home page without deleting a post.
 8. The **delete** function wouldn't allow me to stop other users that didn't create the given post/ comment to *delete* the post/comment.
 9. **Images** would always default to *placeholder* whether an image was added or not.
+10. **Following** wasn't working, and would always redirect me to 404 error page
 
 [Back to Contents](#contents)   
 [Back to Testing in README.md](/README.md#testing)
@@ -155,6 +156,7 @@ These are the fixes for each bug, in the same order as each bug found in [bugs f
     <form method="post">
     ```
     After this issue had been resolved in *edit_post.html* and *new_post.html*, images could be posted by any user
+10. I found that the reason for the follow button not working properly, was because the user profiles weren't being added to the profiles section in the admin panel to follow another user. So far, I am having to manually add new users to the profiles section whenever a new account is created so that other users can follow them, but hope to fix this so that whenever a user registers, they'll be added to the profiles section as well, so that they can be followed.
 
 [Back to Bugs Found](#bugs-found)     
 [Back to Contents](#contents)   
