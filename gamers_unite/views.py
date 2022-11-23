@@ -1,7 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect, HttpResponseRedirect, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic, View
-from .models import Post, Comment
+from django.contrib.auth.models import User
+from .models import Post, Comment, Profile
 from .forms import CommentForm, PostForm
 
 
@@ -192,3 +193,15 @@ class Delete(View):
             if comment.creator_id == self.request.user.id:
                 comment.delete()
             return redirect('post_detail', id)
+
+
+class FollowUser(View):
+
+    def post(self, request, id):
+        user = get_object_or_404(Profile, user=id)
+
+        if user.following.filter(id=request.user.id).exists():
+            user.following.remove(request.user)
+        else:
+            user.following.add(request.user)
+        return HttpResponseRedirect(reverse('home'))
