@@ -39,3 +39,11 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"Comment {self.body} made by {self.name}"
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    following = models.ManyToManyField(User, symmetrical=False, related_name='followers', blank=True)
+
+    def num_of_followers(self):
+        return self.following.count
