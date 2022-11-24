@@ -205,7 +205,7 @@ class Delete(View):
             return redirect('post_detail', id)
 
 
-class FollowUser(View):
+class FollowUser(View, LoginRequiredMixin):
 
     def post(self, request, id, post_id):
         user = get_object_or_404(Profile, user=id)
