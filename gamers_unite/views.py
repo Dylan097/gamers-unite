@@ -200,7 +200,8 @@ class Delete(View):
             return redirect('home')
         elif model == 'Comment':
             comment = get_object_or_404(Comment, id=comment_id)
-            if comment.creator_id == self.request.user.id:
+            post = get_object_or_404(Post, id=id)
+            if comment.creator_id == self.request.user.id or post.author_id == self.request.user.id:
                 comment.delete()
             return redirect('post_detail', id)
 
