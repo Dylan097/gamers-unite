@@ -11,6 +11,22 @@
                 </h1>
                 <!-- Post Author | Post created date and time -->
                 <p class="post-subtitle">
+                    {% if user.is_authenticated %}
+                    {% if user.id is not post.author_id %}
+                    <form method="POST" action="{% url 'follow' post.author_id post.id %}" class="d-inline">
+                        {% csrf_token %}
+                        {% if following %}
+                        <button type="submit" class="btn btn-signup" name="Unfollow" value="Unfollow {{ post.author }}"
+                            aria-label="Unfollow {{ post.author }}">Unfollow
+                            {{ post.author }} {{ profile.following }}</button>
+                        {% else %}
+                        <button type="submit" class="btn btn-signup" name="follow" value="follow {{ post.author }}"
+                            aria-label="Follow {{ post.author }}">Follow
+                            {{ post.author }}</button>
+                        {% endif %}
+                    </form>
+                    {% endif %}
+                    {% endif %}
                     {{ post.author }} | {{ post.created_on }}
                 </p>
             </div>
