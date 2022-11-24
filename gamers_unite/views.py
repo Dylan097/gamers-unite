@@ -7,7 +7,7 @@ from .forms import CommentForm, PostForm
 
 
 class PostList(generic.ListView):
-    model = Post
+    model = Post, Profile
     queryset = Post.objects.filter(status=1).order_by('-created_on')
     template_name = 'index.html'
     paginate_by = 8
@@ -18,10 +18,14 @@ class PostDetail(View):
     def get(self, request, id, *args, **kwargs):
         queryset = Post.objects.filter(status=1)
         post = get_object_or_404(queryset, id=id)
+        profile = get_object_or_404(Profile, id=post.author_id)
         comments = post.comments.filter(approved=True).order_by('created_on')
         liked = False
         if post.likes.filter(id=self.request.user.id).exists():
             liked = True
+        followed = False
+        if profile.following.filter(id=self.request.user.id).exists():
+            followed = True
 
         return render(
             request,
@@ -30,17 +34,22 @@ class PostDetail(View):
                 "post": post,
                 "comments": comments,
                 "liked": liked,
-                "comment_form": CommentForm()
+                "comment_form": CommentForm(),
+                "following": followed
             },
         )
 
     def post(self, request, id, *args, **kwargs):
         queryset = Post.objects.filter(status=1)
         post = get_object_or_404(queryset, id=id)
+        profile = get_object_or_404(Profile, id=post.author_id)
         comments = post.comments.filter(approved=True).order_by('created_on')
         liked = False
         if post.likes.filter(id=self.request.user.id).exists():
             liked = True
+        followed = False
+        if profile.following.filter(id=self.request.user.id).exists():
+            followed = True
 
         comment_form = CommentForm(data=request.POST)
 
@@ -61,7 +70,8 @@ class PostDetail(View):
                 "post": post,
                 "comments": comments,
                 "liked": liked,
-                "comment_form": CommentForm()
+                "comment_form": CommentForm(),
+                "following": followed
             },
         )
 
@@ -197,11 +207,13 @@ class Delete(View):
 
 class FollowUser(View):
 
-    def post(self, request, id):
+    def post(self, request, id, post_id):
         user = get_object_or_404(Profile, user=id)
 
         if user.following.filter(id=request.user.id).exists():
             user.following.remove(request.user)
+            is_following = False
         else:
             user.following.add(request.user)
-        return HttpResponseRedirect(reverse('home'))
+            is_following = True
+        return HttpResponseRedirect(reverse('post_detail', args=[post_id]))
