@@ -38,6 +38,7 @@
                 - [Login page](/LIGHTHOUSE.md#login-page)
                 - [Logout page](/LIGHTHOUSE.md#logout-page)
                 - [Signup page](/LIGHTHOUSE.md#signup-page)
+                - [Share post page](/LIGHTHOUSE.md#share-post-page)
         - [Manual testing](/README.md#manual-testing)
             - [Improvements made](/README.md#improvements-made)
         - [Responsive testing](/README.md#responsive-testing)

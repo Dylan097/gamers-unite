@@ -38,6 +38,7 @@
                 - [Login page](#login-page)
                 - [Logout page](#logout-page)
                 - [Signup page](#signup-page)
+                - [Share post page](#share-post-page)
         - [Manual testing](/README.md#manual-testing)
             - [Improvements made](/README.md#improvements-made)
         - [Responsive testing](/README.md#responsive-testing)
@@ -150,6 +151,15 @@ Any logged in user can logout whenever they wish, so there is only 1 test for th
 Any user can access the signup page, therefore there's only 1 test for this page once again
 
 ![Signup](/static/images/gamers-unite-register-lighthouse.png)
+
+[Back to contents](#contents)   
+[Back to Lighthouse testing README.md](/README.md#lighthouse-testing)
+
+### Share post page
+
+Only logged in users can access this page, therefore, there's only 1 test for this page
+
+![Share post](/static/images/gamers-unite-share-post-lighthouse.png)
 
 [Back to contents](#contents)   
 [Back to Lighthouse testing README.md](/README.md#lighthouse-testing)

@@ -48,6 +48,7 @@
                 - [Login page](/LIGHTHOUSE.md#login-page)
                 - [Logout page](/LIGHTHOUSE.md#logout-page)
                 - [Signup page](/LIGHTHOUSE.md#signup-page)
+                - [Share post page](/LIGHTHOUSE.md#share-post-page)
         - [Manual testing](#manual-testing)
             - [Improvements made](#improvements-made)
         - [Responsive testing](#responsive-testing)
@@ -213,6 +214,13 @@ These features are fully implemented
 - Delete a Post/Comment - Delete a Post/Comment that may have been posted accidentally, or that is no longer wanted
     ![Delete post](/static/images/gamers-unite-delete-post-modal.png)
     ![Delete comment](/static/images/gamers-unite-delete-comment-modal.png)
+- Follow/unfollow a user - Follow a user so that you can show your appreciation of their posts, or unfollow if you start not liking them
+    ![Follow Users](/static/images/gamers-unite-follow-user.png)
+    ![Unfollow Users](/static/images/gamers-unite-unfollow-users.png)
+- Delete others comments - Delete a comment by another user, as the post creator, to be able to remove comments that offend you
+    ![Delete others comments](/static/images/gamers-unite-delete-others-comment-modal.png)
+- Share posts - Share others posts to show others what they're missing or to update others
+    ![Share posts](/static/images/gamers-unite-share-post.png)
 
 ---
 
@@ -221,7 +229,6 @@ These features are fully implemented
 These features are either partially implemented, or to be worked on in the future
 
 - Create a user profile - Create a bio to tell people a little bit about yourself and add a picture of yourself. A profile will also contain each post created by the user
-- Follow a user - Follow a user so that you can view that users posts before any others
   
 [Back to Contents](#contents)
 
@@ -372,6 +379,12 @@ My logout page came back with no errors
 
 ![Logout test result](/static/images/gamers-unite-logout-checks.png)
 
+---
+
+My share post page came back with no errors
+
+![Share post test result](/static/images/gamers-unite-share-post-checks.png)
+
 [Back to Contents](#contents)   
 [Back to Testing](#testing)
 
@@ -423,5 +436,7 @@ Below are all resources that I used to research some of the code or images in th
 - [Login required mixin](https://docs.djangoproject.com/en/3.2/topics/auth/default/#the-loginrequired-mixin)
 - [ifequal in some html file checks](https://docs.djangoproject.com/en/dev/ref/templates/builtins/?from=olddocs#ifequal)
 - [Uploading to cloudinary](https://cloudinary.com/documentation/django_image_and_video_upload)
+- [Post sharing help](https://github.com/legionscript/socialnetwork/tree/tutorial17/social)
+- [Same model foreignkey](https://stackoverflow.com/questions/11214175/can-i-make-a-foreignkey-to-same-model-in-django)
 
 [Back to Contents](#contents)
