@@ -12,3 +12,12 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ('title', 'content', 'featured_image')
+
+
+class ShareForm(forms.Form):
+    body = forms.CharField(
+        label='',
+        widget=forms.Textarea(attrs={
+            'rows': '3',
+        })
+    )
