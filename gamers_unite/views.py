@@ -1,13 +1,14 @@
 from django.shortcuts import render, get_object_or_404, redirect, HttpResponseRedirect, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.utils import timezone
 from django.views import generic, View
 from django.contrib.auth.models import User
 from .models import Post, Comment, Profile
-from .forms import CommentForm, PostForm
+from .forms import CommentForm, PostForm, ShareForm
 
 
 class PostList(generic.ListView):
-    model = Post, Profile
+    model = (Post, Profile)
     queryset = Post.objects.filter(status=1).order_by('-created_on')
     template_name = 'index.html'
     paginate_by = 8
@@ -18,7 +19,10 @@ class PostDetail(View):
     def get(self, request, id, *args, **kwargs):
         queryset = Post.objects.filter(status=1)
         post = get_object_or_404(queryset, id=id)
-        profile = get_object_or_404(Profile, id=post.author_id)
+        if post.shared_user:
+            profile = get_object_or_404(Profile, id=post.shared_user_id)
+        else:
+            profile = get_object_or_404(Profile, id=post.author_id)
         comments = post.comments.filter(approved=True).order_by('created_on')
         liked = False
         if post.likes.filter(id=self.request.user.id).exists():
@@ -42,7 +46,10 @@ class PostDetail(View):
     def post(self, request, id, *args, **kwargs):
         queryset = Post.objects.filter(status=1)
         post = get_object_or_404(queryset, id=id)
-        profile = get_object_or_404(Profile, id=post.author_id)
+        if post.shared_user:
+            profile = get_object_or_404(Profile, id=post.shared_user_id)
+        else:
+            profile = get_object_or_404(Profile, id=post.author_id)
         comments = post.comments.filter(approved=True).order_by('created_on')
         liked = False
         if post.likes.filter(id=self.request.user.id).exists():
@@ -119,28 +126,50 @@ class EditPost(View, LoginRequiredMixin):
     def get(self, request, id, *args, **kwargs):
         queryset = Post.objects.filter(status=1)
         post = get_object_or_404(queryset, id=id)
-        if post.author_id == self.request.user.id:
-            orginal_post = PostForm(instance=post)
-            return render(
-                request,
-                'edit_post.html',
-                {
-                    'post': orginal_post,
-                },
-            )
+        if post.shared_user:
+            if post.shared_user_id == self.request.user.id:
+                original_post = ShareForm(instance=post)
+                return render(
+                    request,
+                    'edit_post.html',
+                    {
+                        'post': orginal_post,
+                    },
+                )
+            else:
+                return redirect('home')
         else:
-            return redirect('home')
+            if post.author_id == self.request.user.id:
+                orginal_post = PostForm(instance=post)
+                return render(
+                    request,
+                    'edit_post.html',
+                    {
+                        'post': orginal_post,
+                    },
+                )
+            else:
+                return redirect('home')
 
     def post(self, request, id, *args, **kwargs):
         queryset = Post.objects.filter(status=1)
         post = get_object_or_404(queryset, id=id)
-        if post.author_id == self.request.user.id:
-            edited_post = PostForm(request.POST, request.FILES, instance=post)
+        if post.shared_user:
+            if post.shared_user_id == self.request.user.id:
+                edited_post = ShareForm(request.POST, request.FILES, instance=post)
 
-            if edited_post.is_valid():
-                edited_post.save()
-            else:
-                edited_post = PostForm(instance=post)
+                if edited_post.is_valid():
+                    edited_post.save()
+                else:
+                    edited_post = ShareForm(instance=post)
+        else:
+            if post.author_id == self.request.user.id:
+                edited_post = PostForm(request.POST, request.FILES, instance=post)
+
+                if edited_post.is_valid():
+                    edited_post.save()
+                else:
+                    edited_post = PostForm(instance=post)
         return redirect('post_detail', id)
 
 
@@ -150,6 +179,10 @@ class EditComment(View):
         queryset = Post.objects.filter(status=1)
         query = Comment.objects.filter(approved=True)
         post = get_object_or_404(queryset, id=id)
+        if post.shared_user:
+            profile = get_object_or_404(Profile, id=post.shared_user_id)
+        else:
+            profile = get_object_or_404(Profile, id=post.author_id)
         comments = post.comments.filter(approved=True).order_by('created_on')
         comment = get_object_or_404(query, id=comment_id)
         if comment.creator_id == self.request.user.id:
@@ -157,6 +190,9 @@ class EditComment(View):
             liked = False
             if post.likes.filter(id=self.request.user.id).exists():
                 liked = True
+            followed = False
+            if profile.following.filter(id=self.request.user.id).exists():
+                followed = True
 
             return render(
                 request,
@@ -165,7 +201,8 @@ class EditComment(View):
                     "post": post,
                     "comments": comments,
                     "liked": liked,
-                    "comment_form": edit_comment
+                    "comment_form": edit_comment,
+                    "following": followed
                 },
             )
         else:
@@ -175,11 +212,18 @@ class EditComment(View):
         queryset = Post.objects.filter(status=1)
         query = Comment.objects.filter(approved=True)
         post = get_object_or_404(queryset, id=id)
+        if post.shared_user:
+            profile = get_object_or_404(Profile, id=post.shared_user_id)
+        else:
+            profile = get_object_or_404(Profile, id=post.author_id)
         comments = post.comments.filter(approved=True).order_by('created_on')
         comment = get_object_or_404(query, id=comment_id)
         liked = False
         if post.likes.filter(id=self.request.user.id).exists():
             liked = True
+        followed = False
+        if profile.following.filter(id=self.request.user.id).exists():
+            followed = True
 
         comment_form = CommentForm(data=request.POST, instance=comment)
 
@@ -195,13 +239,20 @@ class Delete(View):
     def get(self, request, id, comment_id, model):
         if model == 'Post':
             post = get_object_or_404(Post, id=id)
-            if post.author_id == self.request.user.id:
-                post.delete()
+            if post.shared_user:
+                if post.shared_user_id == self.request.user.id:
+                    post.delete()
+            else:
+                if post.author_id == self.request.user.id:
+                    post.delete()
             return redirect('home')
         elif model == 'Comment':
             comment = get_object_or_404(Comment, id=comment_id)
             post = get_object_or_404(Post, id=id)
-            if comment.creator_id == self.request.user.id or post.author_id == self.request.user.id:
+            if post.shared_user:
+                if post.shared_user_id == self.request.user.id:
+                    comment.delete()
+            elif comment.creator_id == self.request.user.id or post.author_id == self.request.user.id:
                 comment.delete()
             return redirect('post_detail', id)
 
@@ -218,3 +269,42 @@ class FollowUser(View, LoginRequiredMixin):
             user.following.add(request.user)
             is_following = True
         return HttpResponseRedirect(reverse('post_detail', args=[post_id]))
+
+
+class SharePost(View, LoginRequiredMixin):
+
+    def get(self, request, id, *args, **kwargs):
+        queryset = Post.objects.filter(status=1)
+        post = get_object_or_404(queryset, id=id)
+        body = ShareForm()
+        return render(
+            request,
+            "share_post.html",
+            {
+                "share_post": body,
+                "post": post
+            },
+        )
+
+    def post(self, request, id, *args, **kwargs):
+        original_post = Post.objects.get(id=id)
+        new_share = ShareForm(request.POST)
+
+        if new_share.is_valid():
+            new_post = Post(
+                shared_content=self.request.POST.get('body'),
+                shared_post=original_post,
+                title=original_post.title,
+                content=original_post.content,
+                author=original_post.author,
+                created_on=original_post.created_on,
+                shared_user=request.user,
+                shared_on=timezone.now(),
+            )
+            new_post.save()
+
+            new_post.featured_image = original_post.featured_image
+
+            new_post.save()
+
+        return redirect('home')
