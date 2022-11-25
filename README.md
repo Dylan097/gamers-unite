@@ -214,9 +214,9 @@ These features are fully implemented
 - Delete a Post/Comment - Delete a Post/Comment that may have been posted accidentally, or that is no longer wanted
     ![Delete post](/static/images/gamers-unite-delete-post-modal.png)
     ![Delete comment](/static/images/gamers-unite-delete-comment-modal.png)
-- Follow/unfollow a user - Follow a user so that you can show your appreciation of their posts, or unfollow if you start not liking them
-    ![Follow Users](/static/images/gamers-unite-follow-user.png)
-    ![Unfollow Users](/static/images/gamers-unite-unfollow-users.png)
+- Follow/unfollow a user - Follow a user so that you can show your appreciation of their posts, or unfollow if you start not liking them   
+    ![Follow Users](/static/images/gamers-unite-follow-user.png)   
+    ![Unfollow Users](/static/images/gamers-unite-unfollow-users.png)   
 - Delete others comments - Delete a comment by another user, as the post creator, to be able to remove comments that offend you
     ![Delete others comments](/static/images/gamers-unite-delete-others-comment-modal.png)
 - Share posts - Share others posts to show others what they're missing or to update others
