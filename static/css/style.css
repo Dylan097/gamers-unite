@@ -108,6 +108,10 @@ img {
     color: #0250C5;
 }
 
+.share:hover {
+    color: #0000008a;
+}
+
 /* Media Queries */
 
 @media (min-width: 576px) {
