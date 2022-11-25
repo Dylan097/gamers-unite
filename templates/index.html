@@ -15,7 +15,13 @@
                 {% for post in post_list %}
                 <div class="col-10 offset-1 col-md-6 offset-md-0 col-lg-3 mt-2">
                     <div class="card h-100">
+
                         <div class="card-body">
+                            {% if post.shared_user %}
+                            <h2>Post shared by {{ post.shared_user }}</h2>
+                            <p>{{ post.shared_content }}</p>
+                            <p>{{ post.shared_on }}</p>
+                            {% endif %}
                             {% if "placeholder" in post.featured_image.url %}
                             <h2 class="author">{{ post.author }}</h2>
                             {% else %}
@@ -33,7 +39,9 @@
                             <hr>
                             <p class="card-text h6">{{ post.created_on }} <i class="far fa-heart"></i>
                                 {{ post.num_of_likes }}</p>
-                            {% ifequal user.id post.author_id %}
+                            {% if post.shared_user %}
+                            {% ifequal user.id post.shared_user_id %}
+                            <!-- Post delete modal -->
                             <div class="modal fade" id="modal-{{ post.id }}" data-bs-backdrop="static"
                                 data-bs-keyboard="false" tabindex="-1" aria-labelledby="delete-{{ post.id }}"
                                 aria-hidden="true">
@@ -47,8 +55,7 @@
                                             <br>
                                             <span class="text-secondary">"{{ post.content | safe }}"</span>
                                             <br>
-                                            <span class="text-danger">Warning! Once this post is deleted, it cannot
-                                                be
+                                            <span class="text-danger">Warning! Once this post is deleted, it cannot be
                                                 recovered!</span>
                                         </div>
                                         <div class="modal-footer">
@@ -60,12 +67,49 @@
                                     </div>
                                 </div>
                             </div>
+                            <!-- Edit/ Delete Post buttons -->
                             <a href="{% url 'edit_post' post.id %}" class="btn btn-signup btn-sm"
                                 aria-label="Edit post">Edit
                                 Post</a>
                             <button class="btn btn-signup btn-sm" id="delete-{{ post.id }}" data-bs-toggle="modal"
                                 data-bs-target="#modal-{{ post.id }}" aria-label="Delete post">Delete Post</button>
                             {% endifequal %}
+                            {% else %}
+                            {% ifequal user.id post.author_id %}
+                            <!-- Post delete modal -->
+                            <div class="modal fade" id="modal-{{ post.id }}" data-bs-backdrop="static"
+                                data-bs-keyboard="false" tabindex="-1" aria-labelledby="delete-{{ post.id }}"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h3 class="modal-title"><i class="fa-solid fa-triangle-exclamation"></i>
+                                                Warning!</h3>
+                                        </div>
+                                        <div class="modal-body">Are you sure you want to delete this post?
+                                            <br>
+                                            <span class="text-secondary">"{{ post.content | safe }}"</span>
+                                            <br>
+                                            <span class="text-danger">Warning! Once this post is deleted, it cannot be
+                                                recovered!</span>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                                                aria-label="cancel">Cancel</button>
+                                            <a href="{% url 'delete' post.id 0 'Post' %}" class="btn btn-signup"
+                                                aria-label="Delete">Delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Edit/ Delete Post buttons -->
+                            <a href="{% url 'edit_post' post.id %}" class="btn btn-signup btn-sm"
+                                aria-label="Edit post">Edit
+                                Post</a>
+                            <button class="btn btn-signup btn-sm" id="delete-{{ post.id }}" data-bs-toggle="modal"
+                                data-bs-target="#modal-{{ post.id }}" aria-label="Delete post">Delete Post</button>
+                            {% endifequal %}
+                            {% endif %}
                         </div>
                     </div>
                 </div>
